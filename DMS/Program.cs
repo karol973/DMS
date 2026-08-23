@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DMS.Services;
+using DMS.Session;
+using System;
 using System.Windows.Forms;
 
 namespace DMS
 {
-    static class Program
-    {
-        /// <summary>
-        /// Główny punkt wejścia dla aplikacji.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-        }
-    }
+	static class Program
+	{
+		[STAThread]
+		static void Main()
+		{
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+
+			ApiClient apiClient = new ApiClient();
+			UserSession userSession = new UserSession();
+			AuthService authService = new AuthService(apiClient, userSession);
+
+			Application.Run(new MainForm(authService));
+		}
+	}
 }

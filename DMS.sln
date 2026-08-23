@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36616.10 d17.14
+VisualStudioVersion = 17.14.36616.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS", "DMS\DMS.csproj", "{85AC2703-5A4C-4624-88A1-AAEBE97FA6DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.Win", "DMS\DMS.Win.csproj", "{85AC2703-5A4C-4624-88A1-AAEBE97FA6DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.Api", "DMS.Api\DMS.Api.csproj", "{70B7CCF9-CDC6-412D-8F5F-EBE705F876DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMS.Api", "DMS.Api\DMS.Api.csproj", "{70B7CCF9-CDC6-412D-8F5F-EBE705F876DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.Application", "DMS.Application\DMS.Application.csproj", "{2CB2E400-BD5E-4C7D-9A01-C13E0FA1640A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMS.Application", "DMS.Application\DMS.Application.csproj", "{2CB2E400-BD5E-4C7D-9A01-C13E0FA1640A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.Domain", "DMS.Domain\DMS.Domain.csproj", "{957BC291-E9D6-4BE9-AA5F-90DF50148688}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMS.Domain", "DMS.Domain\DMS.Domain.csproj", "{957BC291-E9D6-4BE9-AA5F-90DF50148688}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS.Infrastructure", "DMS.Infrastructure\DMS.Infrastructure.csproj", "{6EDA5FEE-EC2D-4EC8-944C-98BDF0D2F7D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMS.Infrastructure", "DMS.Infrastructure\DMS.Infrastructure.csproj", "{6EDA5FEE-EC2D-4EC8-944C-98BDF0D2F7D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
