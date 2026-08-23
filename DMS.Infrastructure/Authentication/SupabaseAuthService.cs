@@ -21,6 +21,7 @@ namespace DMS.Application.Services.Auth
             if (session == null || string.IsNullOrWhiteSpace(session.AccessToken))
             {
                return null;
+                    return null;
             }
 
             return new LoginResult(session.AccessToken, session.RefreshToken ?? string.Empty);
