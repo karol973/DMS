@@ -13,8 +13,7 @@ namespace DMS.Configuration
 		{
 			get
 			{
-				string value =
-					ConfigurationManager.AppSettings["ApiBaseUrl"];
+				string value = ConfigurationManager.AppSettings["ApiBaseUrl"];
 
 				if (string.IsNullOrWhiteSpace(value))
 				{
