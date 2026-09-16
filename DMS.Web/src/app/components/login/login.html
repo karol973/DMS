@@ -1,0 +1,84 @@
+<div class="login-page">
+
+  <div class="login-shell">
+
+    <mat-card class="login-header">
+
+      <mat-card-header>
+        <mat-card-title>DMS</mat-card-title>
+        <mat-card-subtitle>Panel pacjenta</mat-card-subtitle>
+      </mat-card-header>
+
+    </mat-card>
+
+
+    <div class="form-box">
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+        class="login-form">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+
+          <input
+            matInput
+            type="email"
+            formControlName="email">
+
+          @if (loginForm.controls.email.hasError('required')) {
+            <mat-error>
+              Email jest wymagany
+            </mat-error>
+          }
+
+          @if (loginForm.controls.email.hasError('email')) {
+            <mat-error>
+              Podaj poprawny email
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+
+          <input
+            matInput
+            type="password"
+            formControlName="password">
+
+          @if (loginForm.controls.password.hasError('required')) {
+            <mat-error>
+              Hasło jest wymagane
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+
+        @if (loginError) {
+          <div class="login-error">
+            {{ loginError }}
+          </div>
+        }
+
+
+        <button
+          mat-flat-button
+          type="submit"
+          [disabled]="loginForm.invalid">
+
+          Zaloguj się
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

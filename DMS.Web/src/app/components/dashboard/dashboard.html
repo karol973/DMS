@@ -1,0 +1,289 @@
+<mat-sidenav-container class="app-container">
+
+  <!-- MENU -->
+
+  <mat-sidenav
+    class="sidebar"
+    mode="side"
+    opened>
+
+    <div class="sidebar-header">
+
+      <div class="logo-icon">
+        <mat-icon>local_hospital</mat-icon>
+      </div>
+
+      <div>
+        <div class="logo-title">DMS</div>
+        <div class="logo-subtitle">Panel pacjenta</div>
+      </div>
+
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+
+    <mat-nav-list class="menu">
+
+      <a mat-list-item class="active-menu-item">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+
+        <span matListItemTitle>
+          Dashboard
+        </span>
+      </a>
+
+
+      <a mat-list-item>
+        <mat-icon matListItemIcon>calendar_month</mat-icon>
+
+        <span matListItemTitle>
+          Moje wizyty
+        </span>
+      </a>
+
+
+      <a mat-list-item>
+        <mat-icon matListItemIcon>person</mat-icon>
+
+        <span matListItemTitle>
+          Mój profil
+        </span>
+      </a>
+
+    </mat-nav-list>
+
+
+    <div class="sidebar-footer">
+
+      <button
+        mat-button
+        class="logout-button"
+        (click)="logout()">
+
+        <mat-icon>logout</mat-icon>
+
+        Wyloguj
+
+      </button>
+
+    </div>
+
+  </mat-sidenav>
+
+
+  <!-- GŁÓWNA CZĘŚĆ -->
+
+  <mat-sidenav-content class="main-content">
+
+    <div class="dashboard-page">
+
+      <div class="dashboard-shell">
+
+
+        @if (isLoading()) {
+
+          <div class="loading-container">
+
+            <mat-spinner diameter="42"></mat-spinner>
+
+            <p>
+              Ładowanie danych pacjenta...
+            </p>
+
+          </div>
+
+        }
+
+
+        @if (errorMessage()) {
+
+          <mat-card class="error-card">
+
+            <mat-card-content>
+              {{ errorMessage() }}
+            </mat-card-content>
+
+          </mat-card>
+
+        }
+
+
+        @if (patient(); as patient) {
+
+          <!-- POWITANIE -->
+
+          <section class="welcome">
+
+            <div>
+
+              <span class="welcome-label">
+                Panel pacjenta
+              </span>
+
+              <h1>
+                Dzień dobry, {{ patient.firstName }}
+              </h1>
+
+              <p>
+                Tutaj znajdziesz swoje dane oraz informacje medyczne.
+              </p>
+
+            </div>
+
+            <div class="welcome-avatar">
+              <mat-icon>person</mat-icon>
+            </div>
+
+          </section>
+
+
+          <!-- DANE PACJENTA -->
+
+          <mat-card class="patient-card">
+
+            <mat-card-header class="patient-header">
+
+              <div mat-card-avatar class="patient-avatar">
+                <mat-icon>person</mat-icon>
+              </div>
+
+              <mat-card-title>
+                {{ patient.firstName }}
+                {{ patient.lastName }}
+              </mat-card-title>
+
+              <mat-card-subtitle>
+                Dane pacjenta
+              </mat-card-subtitle>
+
+            </mat-card-header>
+
+
+            <mat-card-content>
+
+              <mat-divider></mat-divider>
+
+
+              <div class="patient-data">
+
+                <div class="data-item">
+
+                  <mat-icon>badge</mat-icon>
+
+                  <div>
+                    <span class="label">
+                      Imię i nazwisko
+                    </span>
+
+                    <span class="value">
+                      {{ patient.firstName }}
+                      {{ patient.lastName }}
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="data-item">
+
+                  <mat-icon>email</mat-icon>
+
+                  <div>
+                    <span class="label">
+                      Email
+                    </span>
+
+                    <span class="value">
+                      {{ patient.email }}
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="data-item">
+
+                  <mat-icon>phone</mat-icon>
+
+                  <div>
+                    <span class="label">
+                      Telefon
+                    </span>
+
+                    <span class="value">
+                      {{ patient.phone }}
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="data-item">
+
+                  <mat-icon>home</mat-icon>
+
+                  <div>
+                    <span class="label">
+                      Adres
+                    </span>
+
+                    <span class="value">
+                      {{ patient.address }}
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="data-item">
+
+                  <mat-icon>bloodtype</mat-icon>
+
+                  <div>
+                    <span class="label">
+                      Grupa krwi
+                    </span>
+
+                    <span class="value">
+                      {{ patient.bloodGroup }}
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="data-item">
+
+                  <mat-icon>
+                    medical_information
+                  </mat-icon>
+
+                  <div>
+                    <span class="label">
+                      Informacje medyczne
+                    </span>
+
+                    <span class="value">
+                      {{ patient.diagnosis }}
+                    </span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </mat-card-content>
+
+          </mat-card>
+
+        }
+
+      </div>
+
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
