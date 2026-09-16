@@ -16,8 +16,9 @@ namespace DMS
 			ApiClient apiClient = new ApiClient();
 			UserSession userSession = new UserSession();
 			AuthService authService = new AuthService(apiClient, userSession);
+			PatientService patientService = new PatientService(apiClient);
 
-			Application.Run(new MainForm(authService));
+			Application.Run(new MainForm(authService, patientService));
 		}
 	}
 }

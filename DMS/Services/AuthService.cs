@@ -1,4 +1,5 @@
 ﻿using DMS.Models.Auth;
+using DMS.Models.Common;
 using DMS.Session;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -22,34 +23,35 @@ namespace DMS.Services
 				 Password = password
 			};
 
-			HttpResponseMessage response = await _apiClient.PostAsync(
-				"api/Auth/login",
-				request);
+			HttpResponseMessage response = await _apiClient.PostAsync("api/Auth/login", request);
+			
+			if (!response.IsSuccessStatusCode)
 			{
-				if (!response.IsSuccessStatusCode)
-				{
-					return null;
-				}
-
-				string json =
-					await response.Content.ReadAsStringAsync();
-
-				LoginResult result =
-					JsonConvert.DeserializeObject<LoginResult>(json);
-
-				if (result == null ||
-					string.IsNullOrWhiteSpace(result.AccessToken))
-				{
-					return null;
-				}
-
-				_userSession.Start(result.AccessToken, result.RefreshToken, username);
-
-				_apiClient.SetBearerToken(
-					result.AccessToken);
-
-				return result;
+				return null;
 			}
+
+			string json = await response.Content.ReadAsStringAsync();
+
+			ApiResponse<LoginResult> result = JsonConvert.DeserializeObject<ApiResponse<LoginResult>>(json);
+
+			if (result == null ||
+				string.IsNullOrWhiteSpace(result.Data.AccessToken))
+			{
+				return null;
+			}
+
+			_userSession.Start(result.Data.AccessToken, result.Data.RefreshToken, username, result.Data.UserRole);
+
+			_apiClient.SetBearerToken(result.Data.AccessToken);
+
+			return result.Data;
+			
+		}
+
+		public void Logout()
+		{
+			_userSession.Clear();
+			_apiClient.ClearBearerToken();
 		}
 	}
 }

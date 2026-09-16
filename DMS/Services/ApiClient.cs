@@ -1,9 +1,6 @@
 ﻿using DMS.Configuration;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -24,28 +21,24 @@ namespace DMS.Services
 		}
 		public void SetBearerToken(string token)
 		{
-			_httpClient.DefaultRequestHeaders.Authorization =
-				new AuthenticationHeaderValue(
-					"Bearer",
-					token);
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 		}
 
-		public async Task<HttpResponseMessage> PostAsync<T>(
-			string url,
-			T request)
+		public async Task<HttpResponseMessage> PostAsync<T>(string url, T request)
 		{
-			string json =
-				JsonConvert.SerializeObject(request);
+			string json = JsonConvert.SerializeObject(request);
 
-			var content = new StringContent(
-				json,
-				Encoding.UTF8,
-				"application/json");
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-			return await _httpClient.PostAsync(
-				url,
-				content);
-
+			return await _httpClient.PostAsync(url, content);
 		}
-	}
+      public async Task<HttpResponseMessage> GetAsync(string url)
+      {
+         return await _httpClient.GetAsync(url);
+      }
+      public void ClearBearerToken()
+      {
+         _httpClient.DefaultRequestHeaders.Authorization = null;
+      }
+   }
 }
