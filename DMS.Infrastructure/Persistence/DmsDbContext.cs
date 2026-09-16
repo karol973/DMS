@@ -1,21 +1,18 @@
 ﻿using DMS.Application.Common.Interfaces;
 using DMS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DMS.Infrastructure.Persistance
 {
    public class DmsDbContext : DbContext, IDmsDbContext
    {
-      public DmsDbContext(DbContextOptions options) : base(options)
+      public DmsDbContext(DbContextOptions<DmsDbContext> options) : base(options)
       {
       }
 
       public DbSet<Patient> Patients => Set<Patient>();
+      public DbSet<User> Users => Set<User>();
+      public DbSet<PatientUser> PatientUsers => Set<PatientUser>(); 
       protected override void OnModelCreating(
             ModelBuilder modelBuilder)
       {

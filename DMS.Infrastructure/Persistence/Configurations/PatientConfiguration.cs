@@ -4,11 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DMS.Infrastructure.Persistence.Configurations
 {
-   public class PatientConfiguration
-       : IEntityTypeConfiguration<Patient>
+   public class PatientConfiguration: IEntityTypeConfiguration<Patient>
    {
-      public void Configure(
-          EntityTypeBuilder<Patient> builder)
+      public void Configure(EntityTypeBuilder<Patient> builder)
       {
          builder.ToTable("patients", "public");
 
