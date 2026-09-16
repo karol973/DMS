@@ -1,34 +1,22 @@
-﻿using DMS.Application.Common.Interfaces;
-using DMS.Application.DTOs.Auth;
+﻿using DMS.Application.Common.Authentication.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DMS.Api.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class AuthController : ControllerBase
+   public class AuthController : ApiControllerBase
    {
-      IAuthService _authService;
-
-      public AuthController(IAuthService authService)
+      public AuthController(IMediator mediator) : base(mediator)
       {
-         _authService = authService;
       }
 
       [HttpPost("login")]
-      public async Task<IActionResult> Login([FromBody] LoginRequest request)
+      public Task<IActionResult> Login([FromBody] AuthenticateUserQuery query)
       {
-         LoginResult? result = await _authService.LoginAsync(
-            request.Email, request.Password);
-
-         if (result is null)
-         {
-            return Unauthorized(new
-            {
-               message = "Nieprawidłowy login lub hasło"
-            });
-         }
-         return Ok(result);
+         return HandleAsync(query);
+         
       }
    }
 }

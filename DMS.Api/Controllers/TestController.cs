@@ -23,13 +23,11 @@ namespace DMS.Api.Controllers
             var connectionString =
                 _configuration.GetConnectionString("Supabase");
 
-            await using var connection =
-                new NpgsqlConnection(connectionString);
+            await using var connection = new NpgsqlConnection(connectionString);
 
             await connection.OpenAsync();
 
-            await using var command =
-                new NpgsqlCommand("SELECT NOW()", connection);
+            await using var command = new NpgsqlCommand("SELECT NOW()", connection);
 
             var serverTime = await command.ExecuteScalarAsync();
 

@@ -14,13 +14,9 @@ namespace DMS.Api.Controllers
          _mediator = mediator;
       }
 
-      protected async Task<IActionResult> HandleAsync(
-         IRequest<Response> request,
-         CancellationToken cancellationToken = default)
+      protected async Task<IActionResult> HandleAsync(IRequest<Response> request, CancellationToken cancellationToken = default)
       {
-         Response response = await _mediator.Send(
-            request,
-            cancellationToken);
+         Response response = await _mediator.Send(request, cancellationToken);
 
          if (!response.IsSuccess)
          {
@@ -30,13 +26,9 @@ namespace DMS.Api.Controllers
          return Ok(response);
       }
 
-      protected async Task<IActionResult> HandleAsync<T>(
-         IRequest<Response<T>> request,
-         CancellationToken cancellationToken = default)
+      protected async Task<IActionResult> HandleAsync<T>(IRequest<Response<T>> request, CancellationToken cancellationToken = default)
       {
-         Response<T> response = await _mediator.Send(
-            request,
-            cancellationToken);
+         Response<T> response = await _mediator.Send(request, cancellationToken);
 
          if (!response.IsSuccess)
          {

@@ -1,7 +1,9 @@
 ﻿using DMS.Application.Patients.Commands.CreatePatient;
-using DMS.Application.Patients.Queries.GetPatient;
+using DMS.Application.Patients.Queries.GetPatientById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace DMS.Api.Controllers
 {
@@ -18,10 +20,28 @@ namespace DMS.Api.Controllers
          return HandleAsync(command, cancellationToken);
       }
 
-      [HttpGet("patients")]
-      public Task<IActionResult> GetPatientsAsync()
+      [HttpGet("{id:long}/patientdata")]
+      public Task<IActionResult> GetPatientByIdAsync(long id)
       {
-         return HandleAsync(new GetPatientQuery());
+         return HandleAsync(new GetPatientByIdQuery{
+            PatientId = id
+         });
+      }
+
+      [Authorize]     
+      [HttpGet("test-auth")]
+      public IActionResult TestAuth()
+      {
+         return Ok(new
+         {
+            IsAuthenticated = User.Identity?.IsAuthenticated,
+            Claims = User.Claims.Select(c => new
+            {
+               c.Type,
+               c.Value
+            })
+         });
+
       }
    }
 }
