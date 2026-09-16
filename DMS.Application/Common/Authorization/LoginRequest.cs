@@ -1,4 +1,4 @@
-﻿namespace DMS.Application.DTOs.Auth
+﻿namespace DMS.Application.Common.Authorization
 {
    public class LoginRequest
    {

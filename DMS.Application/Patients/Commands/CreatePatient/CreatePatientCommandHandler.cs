@@ -23,9 +23,7 @@ namespace DMS.Application.Patients.Commands.CreatePatient
             return Response<long>.Failure($"Patient with : {request.FirstName}, {request.LastName}, {request.DateOfBirth} already exists.");
          }
 
-         Patient patient = new Patient(
-               request.FirstName,
-               request.LastName);
+         Patient patient = new Patient(request.FirstName, request.LastName);
 
          patient.DateOfBirth = request.DateOfBirth;
          patient.Gender = request.Gender;

@@ -1,4 +1,4 @@
-﻿using DMS.Application.DTOs.Patient;
+﻿using DMS.Application.Patients.Models;
 using DMS.Domain.Entities;
 
 namespace DMS.Application.Patients.Mappings
@@ -18,7 +18,7 @@ namespace DMS.Application.Patients.Mappings
             Email = patient.Email,
             Address = patient.Address,
             BloodGroup = patient.BloodGroup,
-            Notes = patient.Notes
+            Diagnosis = patient.Notes
          };
       }
    }

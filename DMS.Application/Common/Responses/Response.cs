@@ -5,14 +5,12 @@
       public bool IsSuccess { get; init; }
       public string? Message { get; init; }
 
-      public static Response Success()
-         => new()
+      public static Response Success() => new()
          {
             IsSuccess = true
          };
 
-      public static Response Failure(string message)
-         => new()
+      public static Response Failure(string message) => new()
          {
             IsSuccess = false,
             Message = message

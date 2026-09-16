@@ -1,38 +1,43 @@
-﻿using DMS.Application.Common.Interfaces;
+﻿using DMS.Application.Common.Authorization;
+using DMS.Application.Common.Handlers;
+using DMS.Application.Common.Interfaces;
 using DMS.Application.Common.Responses;
-using DMS.Application.DTOs.Patient;
 using DMS.Application.Patients.Mappings;
+using DMS.Application.Patients.Models;
 using DMS.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DMS.Application.Patients.Queries.GetPatientById
 {
-   internal sealed class GetPatientByIdQueryHandler : IRequestHandler<GetPatientByIdQuery, Response<PatientDto>>
+   internal sealed class GetPatientByIdQueryHandler : HandlerBase, IRequestHandler<GetPatientByIdQuery, Response<PatientDto>>
    {
       private readonly IDmsDbContext _context;
-      public GetPatientByIdQueryHandler(IDmsDbContext context)
-      {
+      public GetPatientByIdQueryHandler(IDmsDbContext context, CurrentUser currentUser) : base(currentUser) 
+      { 
          _context = context;  
       }
 
       public async Task<Response<PatientDto>> Handle(GetPatientByIdQuery request, CancellationToken cancellationToken)
       {
-         Patient? patient = await _context.Patients
-            .AsNoTracking()
-            .FirstOrDefaultAsync(p => p.Id == request.PatientId, cancellationToken);
 
-         if (patient == null)
+         PatientUser? patientUser = await _context.PatientUsers
+          .AsNoTracking()
+          .Include(pu => pu.Patient)
+          .FirstOrDefaultAsync(p => p.PatientId == request.PatientId, cancellationToken);
+
+
+         if (patientUser == null)
          {
-            return Response<PatientDto>.Failure($"Patient with id {request.PatientId} does not exist.");
+            return Response<PatientDto>.Failure($"Patient with id {request.PatientId} not found.");
          }
 
-         return Response<PatientDto>.Success(patient.PatientMap());
+         if (!PermissionHelper.CanReadPatient(CurrentUser, patientUser.PatientId))
+         {
+            return Response<PatientDto>.Failure("Nie masz uprawnień do odczytu tego pacjenta.");
+         }
+
+         return Response<PatientDto>.Success(patientUser.Patient.PatientMap());
 
       }
    }

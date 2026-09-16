@@ -14,10 +14,5 @@ namespace DMS.Application.Patients.Commands.CreatePatient
       public string? Address { get; init; }
       public string? BloodGroup { get; init; }
       public string? Notes { get; init; }
-      //public CreatePatientCommand(string firstName, string lastName)
-      //{
-      //   FirstName = firstName;
-      //   LastName = lastName;
-      //}
    }
 }

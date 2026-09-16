@@ -1,4 +1,4 @@
-﻿using DMS.Application.DTOs.Auth;
+﻿using DMS.Application.Common.Authorization;
 
 namespace DMS.Application.Common.Interfaces
 {
